@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: client-test-sa
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kube-client-test
+  labels:
+    app: kube-client-test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kube-client-test
+    spec:
+      containers:
+      - name: kube-client-test
+        image: bxtp4p/kube-client-test:1.0
+      serviceAccountName: client-test-sa
